@@ -1,96 +1,96 @@
-import { IEvents } from "../base/events";
-import { IOrderForm, FormErrorsType } from "../../types";
+import { IEvents } from '../base/events';
+import { IOrderForm, FormErrorsType } from '../../types';
 
 export class OrderForm implements IOrderForm {
-    private address = '';
-    private email = '';
-    private phone = '';
-    private payment = '';
-    private errors: FormErrorsType = {};
+	private address = '';
+	private email = '';
+	private phone = '';
+	private payment = '';
+	private errors: FormErrorsType = {};
 
-    constructor(protected events: IEvents) {
-        this.validOrder();
-        this.validContact()
-    }
-    
-    setAddressForm(value: string): void {
-        this.address = value.trim();
-        this.validOrder();
-        this.updateOrder();
-    }
-    
-    setOrderForm(field: string, value: string): void {
-        if (field === 'email') {
-            this.email = value.trim();
-        } else if (field === 'phone') {
-            this.phone = value.trim();
-        }
-        this.validContact();
-        this.updateContact()
-    }
+	constructor(protected events: IEvents) {
+		this.validOrder();
+		this.validContact();
+	}
 
-    setPaymentMethod(paymentMethod: string): void {
-        this.payment = paymentMethod;
-        this.updateOrder();
-    }
+	setAddressForm(value: string): void {
+		this.address = value.trim();
+		this.validOrder();
+		this.updateOrder();
+	}
 
-    validationOrder(): boolean {
-        return !!this.address && !!this.payment
-    }
+	setOrderForm(field: string, value: string): void {
+		if (field === 'email') {
+			this.email = value.trim();
+		} else if (field === 'phone') {
+			this.phone = value.trim();
+		}
+		this.validContact();
+		this.updateContact();
+	}
 
-    validationContact(): boolean {
-        return !!this.email && !!this.phone
-    }
+	setPaymentMethod(paymentMethod: string): void {
+		this.payment = paymentMethod;
+		this.updateOrder();
+	}
 
-    getFormState(): {
-        validationOrder: boolean;
-        validationContact: boolean;
-        data: {
-            address:string;
-            email: string;
-            phone: string;
-            payment: string;
-        }
+	validationOrder(): boolean {
+		return !!this.address && !!this.payment;
+	}
 
-    } {
-        return {
-            validationOrder: this.validationOrder(),
-            validationContact: this.validationContact(),
-            data: {
-                address: this.address,
-                email: this.email,
-                phone: this.phone,
-                payment: this.payment
+	validationContact(): boolean {
+		return !!this.email && !!this.phone;
+	}
 
-            }
-        }
-    }
+	getFormState(): {
+		validationOrder: boolean;
+		validationContact: boolean;
+		data: {
+			address: string;
+			email: string;
+			phone: string;
+			payment: string;
+		};
+	} {
+		return {
+			validationOrder: this.validationOrder(),
+			validationContact: this.validationContact(),
+			data: {
+				address: this.address,
+				email: this.email,
+				phone: this.phone,
+				payment: this.payment,
+			},
+		};
+	}
 
-    validOrder(): void {
-        this.errors = {};
-        if (!this.address) {
-            this.errors.address = 'Необходимо указать адрес доставки'
-        }
-        this.events.emit('order:validationErrors', this.errors)
-    }
+	validOrder(): void {
+		this.errors = {};
+		if (!this.address) {
+			this.errors.address = 'Необходимо указать адрес доставки';
+		}
+		this.events.emit('order:validationErrors', this.errors);
+	}
 
-    validContact(): void {
-        this.errors = {}
-        if (!this.email) {
-            this.errors.email = 'Необходимо указать электронную почту'
-        }
-        
-        if (!this.phone) {
-            this.errors.phone = 'Необходимо указать номер телефона'
-        }
-        this.events.emit('contacts:validationErrors', this.errors)
-    }
+	validContact(): void {
+		this.errors = {};
+		if (!this.email) {
+			this.errors.email = 'Необходимо указать электронную почту';
+		}
 
-    updateOrder(): void {
-        this.events.emit('order:stateChange', { isValid: this.validationOrder() });
-    }
-    
-    updateContact(): void {
-        this.events.emit('contacts:stateChange', { isValid: this.validationContact() });
-    }
+		if (!this.phone) {
+			this.errors.phone = 'Необходимо указать номер телефона';
+		}
+		this.events.emit('contacts:validationErrors', this.errors);
+	}
+
+	updateOrder(): void {
+		this.events.emit('order:stateChange', { isValid: this.validationOrder() });
+	}
+
+	updateContact(): void {
+		this.events.emit('contacts:stateChange', {
+			isValid: this.validationContact(),
+		});
+	}
 }

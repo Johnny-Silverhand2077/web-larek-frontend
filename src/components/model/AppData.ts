@@ -1,25 +1,25 @@
-import { IEvents } from "../base/events";
-import { IProduct, IAppData } from "../../types";
+import { IEvents } from '../base/events';
+import { IProduct, IAppData } from '../../types';
 
 export class AppData implements IAppData {
-    protected _productCards: IProduct[];
-    selectedCard: IProduct;
+	protected _productCards: IProduct[];
+	selectedCard: IProduct;
 
-    constructor(protected events: IEvents) {
-        this._productCards = []
-    }
-    
-    set productCards(data: IProduct[]) {
-        this._productCards = data;
-        this.events.emit('productCards:receive')
-    }
+	constructor(protected events: IEvents) {
+		this._productCards = [];
+	}
 
-    get productCards() {
-        return this._productCards;
-    }
+	set productCards(data: IProduct[]) {
+		this._productCards = data;
+		this.events.emit('productCards:receive');
+	}
 
-    setPreview(item: IProduct) { 
-        this.selectedCard = item;
-        this.events.emit('modalCard:open', item)
-    }
+	get productCards() {
+		return this._productCards;
+	}
+
+	setPreview(item: IProduct) {
+		this.selectedCard = item;
+		this.events.emit('modalCard:open', item);
+	}
 }
