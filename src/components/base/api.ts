@@ -19,11 +19,23 @@ export class Api {
         };
     }
 
-    protected handleResponse(response: Response): Promise<object> {
-        if (response.ok) return response.json();
-        else return response.json()
-            .then(data => Promise.reject(data.error ?? response.statusText));
-    }
+    protected handleResponse(res: Response): Promise<object> {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res
+            .json()
+            .then((data) => {
+              console.error("Ошибка ответа сервера:", data);
+              return Promise.reject(data.error ?? res.statusText);
+            })
+            .catch(() => {
+              console.error("Ошибка парсинга ответа:", res.statusText);
+              return Promise.reject(res.statusText);
+            });
+        }
+      }
+
 
     get(uri: string) {
         return fetch(this.baseUrl + uri, {

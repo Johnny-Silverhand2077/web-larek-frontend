@@ -8,19 +8,19 @@ interface IProduct {
 }
 
 interface IOrderData {
-	payment?: string;
 	address?: string;
-	phone?: string;
 	email?: string;
+	phone?: string;
+	payment?: string;
 	total?: number;
 	items: string[];
 }
 
 interface IOrderDataServer {
-	payment: string;
 	address: string;
-	phone: string;
 	email: string;
+	phone: string;
+	payment: string;
 	total: number;
 	items: string[];
 }
@@ -84,7 +84,6 @@ interface IApiClient {
 	cdn: string;
 	items: IProduct[];
 	getProductList(): Promise<IProduct[]>;
-	getProduct(id: string): Promise<IProduct>
 	postOrder(order: IOrderData): Promise<IOrderDataResult>;
 }
 

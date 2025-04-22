@@ -10,7 +10,7 @@ export class ApiClient extends Api implements IApiClient {
 	cdn: string;
 	items: IProduct[];
 
-	constructor(cdn: string, baseUrl: string, options: RequestInit) {
+	constructor(cdn: string, baseUrl: string, options?: RequestInit) {
 		super(baseUrl, options);
 		this.cdn = cdn;
 	}
@@ -24,14 +24,8 @@ export class ApiClient extends Api implements IApiClient {
 		);
 	}
 
-	getProduct(id: string): Promise<IProduct> {
-		return this.get(`/product/${id}`).then((product: IProduct) => ({
-			...product,
-			image: this.cdn + product.image,
-		}));
-	}
 
 	postOrder(order: IOrderData): Promise<IOrderDataResult> {
-		return this.post('/order', order).then((res: IOrderDataResult) => res);
+		return this.post('/order', order).then((data: IOrderDataResult) => data);
 	}
 }

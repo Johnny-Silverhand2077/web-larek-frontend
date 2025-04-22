@@ -1,7 +1,7 @@
 import { IEvents } from '../base/events';
 import { IProduct, IBasketModel } from '../../types';
 
-export class BasketModal implements IBasketModel {
+export class BasketModel implements IBasketModel {
 	basket: IProduct[];
 	events: IEvents;
 
@@ -14,8 +14,8 @@ export class BasketModal implements IBasketModel {
 		return this.basket;
 	}
 
-	addToBasket(item: IProduct) {
-		this.basket.push(item);
+	addToBasket(data: IProduct) {
+		this.basket.push(data);
 		this.events.emit('basket:updated', this.basket);
 	}
 

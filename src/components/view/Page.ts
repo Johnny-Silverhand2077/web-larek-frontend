@@ -11,7 +11,7 @@ export class Page {
 
     constructor(private events: IEvents, coutaiter: HTMLElement) {
         this.basketButton = ensureElement<HTMLButtonElement>('.header__basket', coutaiter);
-        this.basketCouter = ensureElement<HTMLElement>('.header__basket-couter', coutaiter);
+        this.basketCouter = ensureElement<HTMLElement>('.header__basket-counter', coutaiter);
         this.pageWrapper = ensureElement<HTMLElement>('.page__wrapper', coutaiter);
         this.gallery = ensureElement<HTMLElement>('.gallery', coutaiter);
         this.basketButton.addEventListener('click', () => {

@@ -35,7 +35,6 @@ export class CardPreview extends Card implements ICardPreview {
 		this.text.textContent = item.description;
 		this.renderTitle(item.title);
 		this.renderPrice(item.price);
-
 		let isInBasket = false;
 		this.events.emit('basket:check', {
 			id: item.id,

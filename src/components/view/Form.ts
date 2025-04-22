@@ -33,7 +33,7 @@ export abstract class Form {
 	}
 
 	protected addInputListener(): void {
-		this.InputAll.forEach((input) => {
+		this.InputAll.forEach(input => {
 			input.addEventListener('input', () => {
 				this.onInputChange();
 			});
@@ -64,7 +64,7 @@ export abstract class Form {
 		Object.values(errors).forEach((err) => {
 			const errorElement = document.createElement('p');
 			errorElement.textContent = err;
-			this.formElement.appendChild(errorElement);
+			this.formErrors.appendChild(errorElement);
 		});
 	}
 

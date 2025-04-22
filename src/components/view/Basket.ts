@@ -40,11 +40,12 @@ export class Basket implements IBasket {
 		if (items.length > 0) {
 			this.basketList.replaceChildren(...items);
 			this.button.removeAttribute('disabled');
-		}
+		} else {
 		this.basketList.replaceChildren(
 			createElement<HTMLParagraphElement>('p', { textContent: 'Корзина пуста' })
 		);
 		this.button.setAttribute('disabled', 'disabled');
+	 }
 	}
 
 	renderTotalSumProduct(totalSum: number): void {

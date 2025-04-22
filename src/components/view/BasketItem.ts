@@ -7,7 +7,7 @@ export class BasketItem extends Render {
 	basketItem: HTMLElement;
 	removeButton: HTMLButtonElement;
 
-	constructor(template: HTMLTemplateElement, onRemove: () => void) {
+	constructor(template: HTMLTemplateElement, onDelete: () => void) {
 		super();
 
 		this.basketItem = document
@@ -23,13 +23,13 @@ export class BasketItem extends Render {
 		);
 
 		this.initElements(this.basketItem);
-		this.removeButton.addEventListener('click', onRemove);
+		this.removeButton.addEventListener('click', onDelete);
 	}
 
-	render(item: IProduct, IndexItem: number): HTMLElement {
+	render(data: IProduct, IndexItem: number): HTMLElement {
 		this.index.textContent = String(IndexItem);
-		this.renderTitle(item.title);
-		this.renderPrice(item.price);
+		this.renderTitle(data.title);
+		this.renderPrice(data.price);
 		return this.basketItem;
 	}
 }

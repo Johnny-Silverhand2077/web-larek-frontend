@@ -18,6 +18,7 @@ export class ContactsForm extends Form {
 		this.inputPhone = this.formElement.querySelector(
 			'input[name="phone"]'
 		) as HTMLInputElement;
+		
 		this.inputEmail.addEventListener('input', () => {
 			this.events.emit('contacts:setEmail', { email: this.inputEmail.value });
 		});

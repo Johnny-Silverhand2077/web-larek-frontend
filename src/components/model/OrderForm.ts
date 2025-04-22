@@ -14,16 +14,16 @@ export class OrderForm implements IOrderForm {
 	}
 
 	setAddressForm(value: string): void {
-		this.address = value.trim();
+		this.address = value;
 		this.validOrder();
 		this.updateOrder();
 	}
 
 	setOrderForm(field: string, value: string): void {
 		if (field === 'email') {
-			this.email = value.trim();
+			this.email = value;
 		} else if (field === 'phone') {
-			this.phone = value.trim();
+			this.phone = value;
 		}
 		this.validContact();
 		this.updateContact();
