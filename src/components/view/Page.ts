@@ -34,7 +34,7 @@ export class Page {
         }
     }
 
-    appendCard(element: HTMLElement): void {
-        this.gallery.appendChild(element)
+    appendCard(cardElement: HTMLElement): void {
+        this.gallery.appendChild(cardElement)
     }
 }

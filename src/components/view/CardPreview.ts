@@ -8,8 +8,8 @@ export class CardPreview extends Card implements ICardPreview {
 
 	constructor(template: HTMLTemplateElement, protected events: IEvents) {
 		super(template, () => this.handleAddToBasket());
-		this.text = this.element.querySelector('.card__text');
-		this.button = this.element.querySelector('.card__button');
+		this.text = this.cardElement.querySelector('.card__text');
+		this.button = this.cardElement.querySelector('.card__button');
 	}
 
 	private handleAddToBasket(): void {
@@ -30,6 +30,7 @@ export class CardPreview extends Card implements ICardPreview {
 
 	render(item: IProduct): HTMLElement {
 		this.category.textContent = item.category;
+		this.cardCategory = item.category
 		this.image.src = item.image;
 		this.image.alt = item.title;
 		this.text.textContent = item.description;
@@ -45,6 +46,6 @@ export class CardPreview extends Card implements ICardPreview {
 		this.button.textContent = this.getButtonLabel(item, isInBasket);
 		this.button.disabled = item.price === null || isInBasket;
 
-		return this.element;
+		return this.cardElement;
 	}
 }

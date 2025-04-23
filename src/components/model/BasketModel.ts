@@ -38,7 +38,7 @@ export class BasketModel implements IBasketModel {
 	}
 
 	getTotalSumProduct() {
-		return this.basket.reduce((sum, item) => (sum = item.price), 0);
+		return this.basket.reduce((sum, item) => sum + item.price, 0)
 	}
 
 	isInBasket(id: string): boolean {

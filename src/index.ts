@@ -14,7 +14,6 @@ import { ContactsForm } from './components/view/ContactsForm';
 import { Modal } from './components/view/Modal';
 import { Order } from './components/view/Order';
 import { Page } from './components/view/Page';
-import { Render } from './components/view/Render';
 import { Success } from './components/view/Success';
 import { CardPreview } from './components/view/CardPreview';
 

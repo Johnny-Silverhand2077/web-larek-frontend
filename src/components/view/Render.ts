@@ -3,6 +3,13 @@ import { ensureElement } from '../../utils/utils';
 export class Render {
 	protected title: HTMLElement;
 	protected price: HTMLElement;
+	protected color = <Record<string, string>> {
+		"дополнительное": "additional",
+		"софт-скил": "soft",
+		"кнопка": "button",
+		"хард-скил": "hard",
+		"другое": "other",
+	}
 
 	constructor() {}
 
@@ -22,4 +29,5 @@ export class Render {
 	renderPrice(price: number | null): void {
 		this.price.textContent = this.setPrice(price);
 	}
+
 }
